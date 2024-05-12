@@ -1,4 +1,6 @@
-function ClientsRow ({client, onEdit, onDelete}) {
+//import ClientsForm from "./ClientsForm"
+
+const ClientsRow = ({client, onEdit, onDelete}) => {
     const handleEdit = () =>{
         onEdit(client)
     }
@@ -8,7 +10,7 @@ function ClientsRow ({client, onEdit, onDelete}) {
     }
 
     return(
-        <tr>//table row
+        <tr>
             <td>{client.names}</td>
             <td>{client.email}</td>
             <td>{client.phone}</td>

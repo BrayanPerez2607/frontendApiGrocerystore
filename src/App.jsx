@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react'
 import './App.css'
 
 import axios from 'axios'
-import ClientsTable from './components/ClientsTable'
-import ClientsForm from './components/ClientsForm'
+import ClientsTable from './components/ClientComponents/ClientsTable'
+import ClientsForm from './components/ClientComponents/ClientsForm'
 
 function App() {
   const [clients, setClients] = useState([])
@@ -19,16 +19,16 @@ function App() {
   //crea o actualiza un cliente
   const handleCreateOrUpdateClient = async (clientData) => {
     if (editingClient) {
-      await axios.put(`http://localhost:8080/api/grocerystore/clients/${editingClient.id}`, clientData)
+      await axios.put(`http://localhost:8080/apigrocerystore/clients/${editingClient.id}`, clientData)
     } else {
-      await axios.post(`http://localhost:8080/api/grocerystore/clients`, clientData)
+      await axios.post(`http://localhost:8080/apigrocerystore/clients`, clientData)
     }
   }
 
   //recorre la lista de clientes y retornalos como respuesta 
   const fetchClients = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/grocerystore/clients`)
+      const response = await axios.get(`http://localhost:8080/apigrocerystore/clients`)
       setClients(response.data)
     } catch (error) {
       console.log('Error al cargar los clientes: ' , error)
@@ -42,7 +42,7 @@ function App() {
 
   //permite eliminar un cliente a partir de un ID
   const handleDeleteClient = async(clientId) => {
-    await axios.delete(`http://localhost:8080/api/grocerystore/clients/${clientId}`)
+    await axios.delete(`http://localhost:8080/apigrocerystore/clients/${clientId}`)
     fetchClients()
   }
 

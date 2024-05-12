@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function ClientsForm () {
+function ClientsForm ({onSubmit}) {
 
     const [names, setNames] = useState('')
     const [email, setEmail] = useState('')
@@ -29,7 +29,7 @@ function ClientsForm () {
         setPassword(event.target.value)
     }
 
-    const handleId_cardsChange = (event) => {
+    const handleIdCardChange = (event) => {
         setId_card(event.target.value)
     }
 
@@ -53,7 +53,7 @@ function ClientsForm () {
             <input type="text" placeholder="Phone" value={phone} onChange={handlePhonesChange} required />
             <input type="text" placeholder="Address" value={address} onChange={handleAddressesChange} required />
             <input type="password" placeholder="Password" value={password} onChange={handlePasswordsChange} required />
-            <input type="text" placeholder="Document" value={names} onChange={handleId_cardsChange} required />
+            <input type="text" placeholder="Document" value={id_card} onChange={handleIdCardChange} required />
             <button type="submit">Save</button>
         </form>
     )

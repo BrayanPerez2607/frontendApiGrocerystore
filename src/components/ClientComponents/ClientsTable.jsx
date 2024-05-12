@@ -17,7 +17,12 @@ function ClientsTable({clients, onEdit, onDelete}){
             </thead>
             <tbody>
                 {clients.map((client) => (
-                    <ClientsRow key={client.id} client={client} onEdit={onEdit} onDelete={onDelete} />
+                    <ClientsRow
+                        key={client.id} // add a unique key prop here
+                        client={client}
+                        onEdit={onEdit}
+                        onDelete={onDelete}
+                    />
                 ))}
             </tbody>
         </table>
