@@ -6,7 +6,7 @@ const ClientsRow = ({client, onEdit, onDelete}) => {
     }
 
     const handleDelete = () => {
-        onDelete(client.id)
+        onDelete(client.clientId)
     }
 
     return(

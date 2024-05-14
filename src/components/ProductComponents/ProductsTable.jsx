@@ -1,6 +1,6 @@
 import ProductsRow from "./ProductsRow";
 
-function ProductsTable () {
+function ProductsTable (products, onEdit, onDelete) {
     return(
         <table>
             <thead>
@@ -16,8 +16,13 @@ function ProductsTable () {
                 </tr>
             </thead>
             <tbody>
-                {clients.map((product) => (
-                    <ProductsRow key={product.id} product={product} onEdit={onEdit} onDelete={onDelete} />
+                {products.map((product) => (
+                    <ProductsRow 
+                        key={product.id} 
+                        product={product} 
+                        onEdit={onEdit} 
+                        onDelete={onDelete} 
+                    />
                 ))}
             </tbody>
         </table>
