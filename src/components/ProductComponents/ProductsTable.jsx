@@ -1,6 +1,8 @@
 import ProductsRow from "./ProductsRow";
 
-function ProductsTable (products, onEdit, onDelete) {
+function ProductsTable (products/*, onEdit, onDelete*/) {
+
+    console.log("Productos para renderizar:", products);
 
     if (!Array.isArray(products)) {
         return <div>No products found</div>;
@@ -21,12 +23,12 @@ function ProductsTable (products, onEdit, onDelete) {
                 </tr>
             </thead>
             <tbody>
-                {products.map((product) => (
+                {products.map((product, index) => (
                     <ProductsRow
-                        key={product.id} 
+                        key={index}
                         product={product}
-                        onEdit={onEdit}
-                        onDelete={onDelete}
+                        /*onEdit={onEdit}
+                        onDelete={onDelete}*/
                     />
                 ))}
             </tbody>

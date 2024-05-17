@@ -56,9 +56,19 @@ function App() {
   //functions products
   //#region 
 
-  useEffect(()=>{
-    fetchProducts()
-  }, [])
+  useEffect(() => {
+    fetch(`http://localhost:8080/apigrocerystore/products`)
+        .then(response => response.json())
+        .then(data => {
+          console.log("Datos recibidos:", data);  // Log para verificar la respuesta
+          if (Array.isArray(data)) {
+            setProducts(data);
+          } else {
+            console.error("La respuesta de la API no es un arreglo:", data);
+          }
+        })
+        .catch(error => console.error('Error al obtener los datos:', error));
+  }, []);
 
   const handleCreateOrUpdateProduct = async (productData) => {
     if (editingProduct) {
@@ -68,14 +78,14 @@ function App() {
     }
   }
 
-  const fetchProducts = async () => {
+  /*const fetchProducts = async () => {
     try {
       const response = await axios.get(`http://localhost:8080/apigrocerystore/products`);
       setProducts(response.data);
     } catch (error) {
       console.log('Error al cargar los productos: ', error);
     }
-  };
+  };*/
 
   const handleEditProduct = (product) => {
     setEditingProduct(product)
@@ -83,7 +93,7 @@ function App() {
 
   const handleDeleteProduct = async(id) => {
     await axios.delete(`http://localhost:8080/apigrocerystore/products/${id}`)
-    fetchProducts()
+    fetch()
   }
   //#endregion
 
@@ -99,7 +109,7 @@ function App() {
       <ClientsForm onSubmit={handleCreateOrUpdateClient} initialClient={editingClient} />
       <br/>
       <h2>List Products</h2>
-      <ProductsTable product={products} onEdit={handleEditProduct} onDelete={handleDeleteProduct} />
+      <ProductsTable products={products} onEdit={handleEditProduct} onDelete={handleDeleteProduct} />
       <h2>{editingProduct ? 'edit product' : 'create product'}</h2>
       <ProductsForm onSubmit={handleCreateOrUpdateProduct} initialProduct={editingProduct} />
     </div>
