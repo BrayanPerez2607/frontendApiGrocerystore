@@ -61,7 +61,7 @@ function ProductsForm (onSubmit ) {
             <input type="number" placeholder="Precio" value={precio} onChange={handlePrecioChange} required />
             <input type="text" placeholder="Nombre" value={nombre} onChange={handleNombreChange} required />
             <input type="text" placeholder="Categoria" value={categoria} onChange={handleCategoriaChange} required />
-            <input type="number" placeholder="Peso" value={peso} onChange={handlePesoChange} required />
+            <input type="text" placeholder="Peso" value={peso} onChange={handlePesoChange} required />
             <input type="text" placeholder="Marca" value={marca} onChange={handleMarcaChange} required />
             <input type="text" placeholder="Descripcion" value={descripcion} onChange={handleDescripcionChange} required />
             <input type="text" placeholder="Imagen" value={imagen} onChange={handleImagenChange} required />

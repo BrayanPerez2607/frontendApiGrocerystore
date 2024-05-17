@@ -70,12 +70,12 @@ function App() {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/apigrocerystore/products`)
-      setProducts(response.data)
+      const response = await axios.get(`http://localhost:8080/apigrocerystore/products`);
+      setProducts(response.data);
     } catch (error) {
-      console.log('Error al cargar los productos: ' , error)
+      console.log('Error al cargar los productos: ', error);
     }
-  }
+  };
 
   const handleEditProduct = (product) => {
     setEditingProduct(product)
@@ -87,6 +87,8 @@ function App() {
   }
   //#endregion
 
+  
+
   return (
     <div className='App'>
       <h1>Api Grocery Store</h1>
@@ -97,9 +99,9 @@ function App() {
       <ClientsForm onSubmit={handleCreateOrUpdateClient} initialClient={editingClient} />
       <br/>
       <h2>List Products</h2>
-      <ProductsTable products={products} onEdit={handleEditProduct} onDelete={handleDeleteProduct} />
+      <ProductsTable product={products} onEdit={handleEditProduct} onDelete={handleDeleteProduct} />
       <h2>{editingProduct ? 'edit product' : 'create product'}</h2>
-      <ProductsForm onSubmit={handleCreateOrUpdateProduct} initialClient={editingProduct} />
+      <ProductsForm onSubmit={handleCreateOrUpdateProduct} initialProduct={editingProduct} />
     </div>
   )
 }

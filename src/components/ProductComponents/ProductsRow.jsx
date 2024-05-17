@@ -8,7 +8,7 @@ function ProductsRow ({product, onEdit, onDelete}) {
     }
 
     return(
-        <tr>//table row
+        <tr>
             <td>{product.codigo}</td>
             <td>{product.precio}</td>
             <td>{product.nombre}</td>

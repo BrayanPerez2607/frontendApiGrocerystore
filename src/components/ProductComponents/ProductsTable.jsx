@@ -1,6 +1,11 @@
 import ProductsRow from "./ProductsRow";
 
 function ProductsTable (products, onEdit, onDelete) {
+
+    if (!Array.isArray(products)) {
+        return <div>No products found</div>;
+    }
+
     return(
         <table>
             <thead>
@@ -17,11 +22,11 @@ function ProductsTable (products, onEdit, onDelete) {
             </thead>
             <tbody>
                 {products.map((product) => (
-                    <ProductsRow 
+                    <ProductsRow
                         key={product.id} 
-                        product={product} 
-                        onEdit={onEdit} 
-                        onDelete={onDelete} 
+                        product={product}
+                        onEdit={onEdit}
+                        onDelete={onDelete}
                     />
                 ))}
             </tbody>
