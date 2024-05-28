@@ -9,6 +9,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import SalesList from "./components/SaleComponents/SalesList.jsx";
 import SaleDetails from "./components/SaleComponents/SaleDetails.jsx";
 import AddSale from "./components/SaleComponents/AddSale.jsx";
+import Register from './components/RegisterLoginComponents/Register.jsx';
+import Login from './components/RegisterLoginComponents/Login.jsx';
 
 function App() {
   const [clients, setClients] = useState([])
@@ -16,6 +18,17 @@ function App() {
 
   const [products, setProducts] = useState([])
   const [editingProduct, setEditingProduct] = useState(null)
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Estado de autenticación
+
+  // Manejar la autenticación del usuario
+const handleLogin = () => {
+  setIsAuthenticated(true);
+};
+
+const handleLogout = () => {
+  setIsAuthenticated(false);
+};
 
   //functions clients
   //#region 
@@ -102,28 +115,37 @@ function App() {
   
 
   return (
-      <div className='App'>
-          <h1>Api Grocery Store</h1>
-          <br/>
+    <div className='App'>
+      <h1>Api Grocery Store</h1>
+      {!isAuthenticated ? (
+        <>
+          <Register />
+          <Login onLogin={handleLogin} />
+        </>
+      ) : (
+        <>
+          <button onClick={handleLogout}>Logout</button>
           <h2>List Clients</h2>
-          <ClientsTable clients={clients} onEdit={handleEditClient} onDelete={handleDeleteClient}/>
-          <h2>{editingClient ? 'edit client' : 'create client'}</h2>
-          <ClientsForm onSubmit={handleCreateOrUpdateClient} initialClient={editingClient}/>
-          <br/>
+          <ClientsTable clients={clients} onEdit={handleEditClient} onDelete={handleDeleteClient} />
+          <h2>{editingClient ? 'Edit Client' : 'Create Client'}</h2>
+          <ClientsForm onSubmit={handleCreateOrUpdateClient} initialClient={editingClient} />
+          <br />
           <h2>List Products</h2>
-          <ProductsTable products={products} onEdit={handleEditProduct} onDelete={handleDeleteProduct}/>
-          <h2>{editingProduct ? 'edit product' : 'create product'}</h2>
-          <ProductsForm onSubmit={handleCreateOrUpdateProduct} initialProduct={editingProduct}/>
-          <br/>
+          <ProductsTable products={products} onEdit={handleEditProduct} onDelete={handleDeleteProduct} />
+          <h2>{editingProduct ? 'Edit Product' : 'Create Product'}</h2>
+          <ProductsForm onSubmit={handleCreateOrUpdateProduct} initialProduct={editingProduct} />
+          <br />
           <Router>
-              <Routes>
-                  <Route exact path="/apigrocerystore/sales" element={<SalesList />} />
-                  <Route path="/" element={<AddSale />} />
-                  <Route path="/apigrocerystore/sales/:id" element={<SaleDetails />} />
-              </Routes>
+            <Routes>
+              <Route exact path="/apigrocerystore/sales" element={<SalesList />} />
+              <Route path="/" element={<AddSale />} />
+              <Route path="/apigrocerystore/sales/:id" element={<SaleDetails />} />
+            </Routes>
           </Router>
-      </div>
-  )
+        </>
+      )}
+    </div>
+  );
 }
 
 export default App
