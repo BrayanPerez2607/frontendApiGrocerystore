@@ -12,7 +12,7 @@ function ClientsTable({clients, onEdit, onDelete}){
                     <th>PHONES</th>
                     <th>ADDRESSES</th>
                     <th>PASSWORDS</th>
-                    <th>DOCUEMENT</th>
+                    <th>DOCUMENT</th>
                 </tr>
             </thead>
             <tbody>

@@ -1,10 +1,10 @@
 import ProductsRow from "./ProductsRow";
 
-function ProductsTable (products/*, onEdit, onDelete*/) {
+function ProductsTable({ products, onEdit, onDelete }) { // Recibir props correctamente
 
     console.log("Productos para renderizar:", products);
 
-    if (!Array.isArray(products)) {
+    if (!Array.isArray(products) || products.length === 0) {
         return <div>No products found</div>;
     }
 
@@ -27,8 +27,8 @@ function ProductsTable (products/*, onEdit, onDelete*/) {
                     <ProductsRow
                         key={index}
                         product={product}
-                        /*onEdit={onEdit}
-                        onDelete={onDelete}*/
+                        onEdit={onEdit}
+                        onDelete={onDelete}
                     />
                 ))}
             </tbody>
@@ -36,4 +36,4 @@ function ProductsTable (products/*, onEdit, onDelete*/) {
     )
 }
 
-export default ProductsTable
+export default ProductsTable;

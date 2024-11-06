@@ -11,6 +11,9 @@ import SaleDetails from "./components/SaleComponents/SaleDetails.jsx";
 import AddSale from "./components/SaleComponents/AddSale.jsx";
 import Register from './components/RegisterLoginComponents/Register.jsx';
 import Login from './components/RegisterLoginComponents/Login.jsx';
+import InvoiceForm from './components/InvoiceComponents/InvoiceForm.jsx';
+import InvoiceTable from './components/InvoiceComponents/InvoiceTable.jsx';
+
 
 function App() {
   const [clients, setClients] = useState([])
@@ -146,6 +149,37 @@ const handleLogout = () => {
       )}
     </div>
   );
+
+  const [sales, setSales] = useState([]);
+
+    const handleAddSale = (saleData) => {
+        const newSale = {
+            id: sales.length + 1, // Genera un nuevo ID
+            ...saleData,
+            purchaseDate: new Date().toLocaleDateString(), // Fecha de compra
+            client: initialClients.find(client => client.clientId === saleData.clientId), // Busca el cliente
+            products: initialProducts.filter(product => saleData.productIds.includes(product.id)), // Filtra los productos
+        };
+        setSales([...sales, newSale]); // Actualiza el estado de ventas
+    };
+
+    const handleEditSale = (saleToEdit) => {
+        // Aquí deberías implementar la lógica para editar una venta
+        console.log("Editar venta:", saleToEdit);
+    };
+
+    const handleDeleteSale = (saleId) => {
+        const updatedSales = sales.filter(sale => sale.id !== saleId); // Filtra la venta a eliminar
+        setSales(updatedSales); // Actualiza el estado de ventas
+    };
+
+    return (
+        <div>
+            <h1>Gestión de Ventas</h1>
+            <InvoiceForm onSubmit={handleAddSale} clients={initialClients} products={initialProducts} />
+            <InvoiceTable sales={sales} onEditSale={handleEditSale} onDeleteSale={handleDeleteSale} />
+        </div>
+    );
 }
 
 export default App
